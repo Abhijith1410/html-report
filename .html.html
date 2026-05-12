@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPIA & MODS Compliance Report — Product X | UK Care Home Installations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #0d1b2a;
+    --navy:       #1b3a5c;
+    --mid:        #2e5f8a;
+    --teal:       #0d7a7a;
+    --teal-lt:    #12a0a0;
+    --amber:      #c97c1e;
+    --amber-lt:   #f0a340;
+    --red:        #b83c3c;
+    --red-lt:     #e05555;
+    --green:      #1e7a4a;
+    --green-lt:   #29a86a;
+    --paper:      #f5f3ee;
+    --paper-dark: #eae6de;
+    --paper-mid:  #efe9dc;
+    --rule:       rgba(13,27,42,0.12);
+    --rule-dark:  rgba(13,27,42,0.22);
+    --white:      #ffffff;
+    --caption:    rgba(13,27,42,0.52);
+    --shadow:     0 2px 24px rgba(13,27,42,0.10);
+    --shadow-lg:  0 6px 40px rgba(13,27,42,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── COVER ────────────────────────────────────────────── */
+  .cover {
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cover-accent {
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13,122,122,0.35) 0%, transparent 70%);
+  }
+  .cover-accent2 {
+    position: absolute;
+    bottom: 20%; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,124,30,0.18) 0%, transparent 70%);
+  }
+
+  .cover-label {
+    position: absolute;
+    top: 40px; left: 52px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cover-label-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal-lt);
+  }
+  .cover-label-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .cover-body {
+    position: relative;
+    z-index: 2;
+    padding: 56px 52px 60px;
+    max-width: 860px;
+  }
+
+  .cover-tag {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .cover-title em { color: var(--teal-lt); font-style: normal; }
+
+  .cover-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.68);
+    max-width: 560px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  .cover-meta {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 28px;
+  }
+  .cover-meta-item label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item span {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.82);
+  }
+
+  /* ── NAV / TOC ────────────────────────────────────────── */
+  .toc-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    box-shadow: 0 1px 16px rgba(13,27,42,0.07);
+  }
+  .toc-bar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 16px 20px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--caption);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .toc-bar a:hover { color: var(--navy); border-bottom-color: var(--teal); }
+  .toc-bar a .n {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+  }
+
+  /* ── LAYOUT ───────────────────────────────────────────── */
+  .page { max-width: 980px; margin: 0 auto; padding: 0 52px; }
+
+  section { padding: 72px 0 56px; border-bottom: 1px solid var(--rule); }
+  section:last-child { border-bottom: none; }
+
+  /* ── SECTION HEADERS ──────────────────────────────────── */
+  .sec-header { margin-bottom: 40px; }
+  .sec-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-kicker::after {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--teal);
+    opacity: 0.5;
+  }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+  .sec-lead {
+    margin-top: 14px;
+    font-size: 15.5px;
+    color: var(--caption);
+    max-width: 680px;
+    line-height: 1.75;
+  }
+
+  /* ── EXECUTIVE SUMMARY ────────────────────────────────── */
+  .exec-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .exec-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px;
+    border-top: 3px solid var(--teal);
+  }
+  .exec-card.amber-top { border-top-color: var(--amber); }
+  .exec-card.red-top   { border-top-color: var(--red); }
+  .exec-card .card-icon { font-size: 22px; margin-bottom: 12px; }
+  .exec-card .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--caption);
+    margin-bottom: 6px;
+  }
+  .exec-card .card-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  .exec-card .card-desc {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--caption);
+    line-height: 1.6;
+  }
+
+  .exec-summary-box {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 32px 36px;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+  .exec-summary-box p + p { margin-top: 14px; }
+  .exec-summary-box strong { color: var(--teal-lt); font-weight: 600; }
+
+  /* ── PROSE & LAYOUT ───────────────────────────────────── */
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+    margin-top: 32px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p { margin-bottom: 14px; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 600; }
+
+  /* ── TWO-COL ──────────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  /* ── CARDS ────────────────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px 28px;
+  }
+  .card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--teal);
+    color: var(--white);
+  }
+  .card-title .pill.amber { background: var(--amber); }
+  .card-title .pill.red   { background: var(--red); }
+  .card-title .pill.green { background: var(--green); }
+
+  /* ── REQUIREMENT LIST ─────────────────────────────────── */
+  .req-list { list-style: none; padding: 0; }
+  .req-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .req-list li:last-child { border-bottom: none; }
+  .req-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-top: 8px;
+  }
+  .req-list li.amber::before { background: var(--amber); }
+  .req-list li.red::before   { background: var(--red); }
+  .req-list li.green::before { background: var(--green); }
+
+  /* ── STEP LIST ────────────────────────────────────────── */
+  .step-list { list-style: none; padding: 0; counter-reset: steps; }
+  .step-list li {
+    counter-increment: steps;
+    display: flex; gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before {
+    content: counter(steps, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: rgba(13,122,122,0.08);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-list li .step-body { flex: 1; }
+  .step-list li .step-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .step-list li .step-desc { font-size: 13.5px; color: var(--caption); line-height: 1.6; }
+
+  /* ── RISK TABLE ───────────────────────────────────────── */
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .risk-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .risk-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .risk-table tr:nth-child(even) td { background: var(--paper); }
+  .risk-table tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-high   { background: #fde8e8; color: var(--red); }
+  .badge-med    { background: #fef3d9; color: var(--amber); }
+  .badge-low    { background: #e0f5eb; color: var(--green); }
+  .badge-crit   { background: var(--red); color: var(--white); }
+
+  /* ── CALLOUT ──────────────────────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--teal);
+    background: rgba(13,122,122,0.06);
+    padding: 16px 20px;
+    border-radius: 0 4px 4px 0;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .callout.amber { border-left-color: var(--amber); background: rgba(201,124,30,0.06); }
+  .callout.red   { border-left-color: var(--red);   background: rgba(184,60,60,0.06); }
+  .callout strong { color: var(--navy); }
+
+  /* ── TIMELINE ─────────────────────────────────────────── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal), var(--amber));
+    border-radius: 2px;
+  }
+  .tl-item { position: relative; padding-bottom: 32px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--teal);
+  }
+  .tl-dot.amber { border-color: var(--amber); }
+  .tl-dot.red   { border-color: var(--red); background: var(--red); }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .tl-date.amber { color: var(--amber); }
+  .tl-date.red   { color: var(--red); }
+  .tl-title { font-weight: 600; color: var(--navy); font-size: 14.5px; margin-bottom: 4px; }
+  .tl-desc  { font-size: 13.5px; color: var(--caption); line-height: 1.6; }
+
+  /* ── MODS DATA DOMAINS ────────────────────────────────── */
+  .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .domain-tile {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+  }
+  .domain-tile .d-icon { font-size: 24px; margin-bottom: 8px; }
+  .domain-tile .d-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .domain-tile .d-sub {
+    font-size: 10.5px;
+    color: var(--caption);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* ── IMPACT MATRIX ────────────────────────────────────── */
+  .matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .matrix th {
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: 2px solid var(--navy);
+    color: var(--navy);
+  }
+  .matrix td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .matrix tr:last-child td { border-bottom: none; }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-red    { background: var(--red-lt); }
+  .dot-amber  { background: var(--amber-lt); }
+  .dot-green  { background: var(--green-lt); }
+
+  /* ── REC CARDS ────────────────────────────────────────── */
+  .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .rec-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .rec-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--paper-dark);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .rec-content .rec-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 6px;
+    margin-top: 4px;
+  }
+  .rec-content .rec-desc { font-size: 13px; color: var(--caption); line-height: 1.65; }
+  .rec-content .rec-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: var(--white);
+    background: var(--teal);
+  }
+  .rec-content .rec-tag.amber { background: var(--amber); }
+  .rec-content .rec-tag.navy  { background: var(--navy); }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.45);
+    padding: 36px 52px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer strong { color: rgba(255,255,255,0.75); }
+
+  /* ── UTILITY ──────────────────────────────────────────── */
+  .mt-24 { margin-top: 24px; }
+  .mt-32 { margin-top: 32px; }
+  .mt-40 { margin-top: 40px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .label-tag {
+    display: inline-block;
+    background: var(--paper-dark);
+    color: var(--navy);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  .divider { height: 1px; background: var(--rule); margin: 32px 0; }
+  .print-note {
+    font-size: 11px;
+    color: var(--caption);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  @media print {
+    .toc-bar { display: none; }
+    section { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 720px) {
+    .page { padding: 0 20px; }
+    .exec-cards, .two-col, .three-col, .domain-grid, .rec-grid { grid-template-columns: 1fr; }
+    .cover-body { padding: 40px 20px 48px; }
+    .toc-bar { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ COVER ══════════════════════ -->
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-accent"></div>
+  <div class="cover-accent2"></div>
+  <div class="cover-label">
+    <div class="cover-label-dot"></div>
+    <span class="cover-label-text">Compliance &amp; Regulatory Intelligence</span>
+  </div>
+  <div class="cover-body">
+    <span class="cover-tag">Confidential · May 2026</span>
+    <h1 class="cover-title">
+      Impact of <em>DPIA</em> &amp; <em>MODS</em><br>
+      on Product X Care Home<br>
+      Installations in the UK
+    </h1>
+    <p class="cover-sub">
+      A structured analysis of Data Protection Impact Assessment obligations under UK GDPR and
+      Minimum Operational Data Standard requirements — evaluating regulatory exposure,
+      operational change, and the readiness roadmap to July 2026.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Document Type</label>
+        <span>Compliance Impact Report</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Scope</label>
+        <span>UK Care Home Sector</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Regulatory Frame</label>
+        <span>UK GDPR · DPA 2018 · MODS DAPB4102</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Compliance Deadline</label>
+        <span>1 July 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav class="toc-bar">
+  <a href="#exec"><span class="n">01</span> Executive Summary</a>
+  <a href="#dpia"><span class="n">02</span> DPIA Requirements</a>
+  <a href="#mods"><span class="n">03</span> MODS Compliance</a>
+  <a href="#impact"><span class="n">04</span> Combined Impact</a>
+  <a href="#risks"><span class="n">05</span> Risk Register</a>
+  <a href="#roadmap"><span class="n">06</span> Readiness Roadmap</a>
+  <a href="#recs"><span class="n">07</span> Recommendations</a>
+</nav>
+
+<div class="page">
+
+<!-- ══════════════════════ 01 EXECUTIVE SUMMARY ══════════════════════ -->
+<section id="exec">
+  <div class="sec-header">
+    <div class="sec-kicker">01 · Overview</div>
+    <h2 class="sec-title">Executive Summary</h2>
+    <p class="sec-lead">
+      Product X operates in a heavily regulated environment. Two converging compliance requirements —
+      UK GDPR Data Protection Impact Assessments and the NHS Minimum Operational Data Standard —
+      demand coordinated action before the July 2026 deadline.
+    </p>
+  </div>
+
+  <div class="exec-cards">
+    <div class="exec-card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-label">DPIA Status</div>
+      <div class="card-val">Legally Mandatory</div>
+      <div class="card-desc">Processing of resident health data at scale using new technology triggers an automatic DPIA obligation under Article 35, UK GDPR.</div>
+    </div>
+    <div class="exec-card amber-top">
+      <div class="card-icon">📋</div>
+      <div class="card-label">MODS Deadline</div>
+      <div class="card-val">1 July 2026</div>
+      <div class="card-desc">All DSCR assured solution suppliers must fully comply with MODS standard DAPB4102. Non-compliance means loss of NHS Assured status.</div>
+    </div>
+    <div class="exec-card red-top">
+      <div class="card-icon">⚠️</div>
+      <div class="card-label">Max ICO Penalty</div>
+      <div class="card-val">£17.5M / 4%</div>
+      <div class="card-desc">Maximum fine for UK GDPR infringement is £17.5 million or 4% of global annual turnover — whichever is higher.</div>
+    </div>
+  </div>
+
+  <div class="exec-summary-box">
+    <p>
+      Product X — deployed within CQC-registered care home settings — processes <strong>special category health data</strong> relating to vulnerable residents, engages staff access controls, and interfaces with NHS partner systems. This profile satisfies multiple triggers for a mandatory DPIA under UK GDPR Article 35, including large-scale health data processing, use of innovative technology, and processing concerning vulnerable individuals.
+    </p>
+    <p>
+      Simultaneously, the Digitising Social Care Programme's <strong>Minimum Operational Data Standard (MODS)</strong>, formally published 1 April 2025 under DAPB4102, requires all DSCR assured solution suppliers to standardise how care data is collected, structured, and shared — with a conformance date of <strong>1 July 2026</strong>. Failure to comply by this date risks loss of NHS Assured status, commercial exclusion, and erosion of care provider trust.
+    </p>
+    <p>
+      The two frameworks are mutually reinforcing: a well-executed DPIA embeds privacy-by-design into MODS data flows, while MODS compliance creates the standardised, auditable data architecture that strengthens DPIA risk mitigations. Product X's compliance strategy must treat both as a unified programme, not separate workstreams.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════ 02 DPIA ══════════════════════ -->
+<section id="dpia">
+  <div class="sec-header">
+    <div class="sec-kicker">02 · Data Protection</div>
+    <h2 class="sec-title">DPIA Requirements for Care Home Settings</h2>
+    <p class="sec-lead">
+      Under UK GDPR (Article 35) and the Data Protection Act 2018, a DPIA is legally required before
+      processing that is likely to result in high risk to individuals' rights and freedoms. Care homes
+      meet this threshold by definition.
+    </p>
+  </div>
+
+  <h3>2.1 Legal Basis &amp; Triggers</h3>
+  <p>
+    Article 35(1) of UK GDPR mandates a DPIA where processing — particularly using new technologies —
+    is likely to result in high risk. The ICO identifies several criteria that, individually or in combination,
+    trigger this obligation. Product X satisfies several simultaneously:
+  </p>
+
+  <div class="two-col mt-24">
+    <div class="card">
+      <div class="card-title">Mandatory Triggers <span class="pill">Always Required</span></div>
+      <ul class="req-list">
+        <li>Processing <strong>special category health data</strong> on a large scale (Article 9 data)</li>
+        <li>Use of <strong>innovative technology</strong> in a health or social care setting</li>
+        <li>Processing personal data of <strong>vulnerable individuals</strong> (elderly residents)</li>
+        <li>Systematic processing for <strong>care needs assessment</strong> and resource allocation</li>
+        <li>Data sharing across <strong>multiple organisations</strong> (NHS, local authority)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Additional Considerations <span class="pill amber">Context-Dependent</span></div>
+      <ul class="req-list">
+        <li class="amber">Biometric or behavioural monitoring features within Product X</li>
+        <li class="amber">Integration with GP Connect or Shared Care Records</li>
+        <li class="amber">Automated care plan suggestions or profiling</li>
+        <li class="amber">Staff monitoring or access-logging at scale</li>
+        <li class="amber">Significant changes to existing processing activities post-deployment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout mt-32">
+    <strong>Key Principle:</strong> Under UK GDPR, a DPIA is a "live" document — it must be started
+    before processing begins and updated whenever there is a significant change in how or why
+    data is processed, the type of data used, or the technology involved in Product X deployments.
+  </div>
+
+  <h3>2.2 What a DPIA Must Document for Product X</h3>
+  <p>The ICO's nine-step DPIA process requires systematic assessment of the following elements for each care home deployment:</p>
+
+  <ol class="step-list mt-24">
+    <li>
+      <div class="step-body">
+        <div class="step-title">Identify the Need for a DPIA</div>
+        <div class="step-desc">Confirm that Product X's processing of resident health records, medication data, care plans, and staff access logs meets mandatory triggers under Article 35. Document the screening decision.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Describe the Processing</div>
+        <div class="step-desc">Map all data flows: what data is collected (health status, ADL scores, medication), how it is stored, who has access (care staff, managers, NHS professionals), retention periods, and third-party processors.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Assess Necessity &amp; Proportionality</div>
+        <div class="step-desc">Justify that data collected by Product X is the minimum necessary (data minimisation). Document lawful basis under Articles 6 and 9(2)(h) — processing necessary for health or social care provision.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Identify &amp; Assess Risks to Individuals</div>
+        <div class="step-desc">Assess risks including unauthorised access to resident records, re-identification from anonymised data, discriminatory care decisions from algorithmic outputs, and third-party data processor failures.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Identify Privacy Measures &amp; Mitigations</div>
+        <div class="step-desc">Document technical controls (encryption at rest/in transit, role-based access), organisational measures (staff training, DPO oversight), and contractual provisions with sub-processors.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Sign Off &amp; DPO Consultation</div>
+        <div class="step-desc">The Data Protection Officer must be consulted throughout. If residual risk remains high after mitigation, consultation with the ICO is mandatory before deployment proceeds.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Integrate Outcomes into the Project Plan</div>
+        <div class="step-desc">Embed DPIA outputs into Product X's development, procurement, and deployment workflows. Privacy-by-design requirements must be translated into technical specifications.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Record of Processing Activities (RoPA)</div>
+        <div class="step-desc">Both the Product X vendor and each care home operator must maintain an Article 30 RoPA listing data categories, purposes, legal basis, recipients, and retention periods for all processing activities.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-body">
+        <div class="step-title">Keep the DPIA Under Review</div>
+        <div class="step-desc">Schedule regular reviews — at minimum annually and upon any significant change to Product X's functionality, data integrations, or the regulatory landscape (e.g., DUAA 2025 updates).</div>
+      </div>
+    </li>
+  </ol>
+
+  <h3>2.3 DPIA Obligations by Role</h3>
+  <div class="two-col mt-24">
+    <div class="card">
+      <div class="card-title">Care Home Operator (Data Controller)</div>
+      <ul class="req-list">
+        <li>Primary responsibility for completing and maintaining the DPIA</li>
+        <li>Must appoint a DPO if processing health data at scale</li>
+        <li>Publish privacy notices to residents, families, and staff</li>
+        <li>Ensure data processing agreements with Product X vendor</li>
+        <li>Submit DPIA to ICO if residual risk cannot be mitigated</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Product X Vendor (Data Processor)</div>
+      <ul class="req-list">
+        <li>Provide controller with DPIA-ready technical documentation</li>
+        <li>Implement privacy-by-design into product architecture</li>
+        <li>Maintain data processing agreements with each operator</li>
+        <li>Notify controllers of any sub-processor changes</li>
+        <li>Support controller's DPIA process with system data flow maps</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout amber mt-32">
+    <strong>2025 DUAA Update:</strong> The Data (Use and Access) Act received Royal Assent on 19 June 2025,
+    with key provisions commencing 5 February 2026. Article 35 DPIA obligations remain mandatory.
+    ICO guidance is under review — all 2026 DPIA work should be checked against the latest ICO guidance before sign-off.
+  </div>
+</section>
+
+<!-- ══════════════════════ 03 MODS ══════════════════════ -->
+<section id="mods">
+  <div class="sec-header">
+    <div class="sec-kicker">03 · Interoperability Standard</div>
+    <h2 class="sec-title">MODS Compliance — Scope &amp; Requirements</h2>
+    <p class="sec-lead">
+      The Minimum Operational Data Standard (MODS), published 1 April 2025 as information standard DAPB4102,
+      defines a baseline of data that all CQC-registered care providers must collect in a standardised,
+      interoperable format within their Digital Social Care Records.
+    </p>
+  </div>
+
+  <h3>3.1 Scope &amp; Who It Affects</h3>
+  <div class="two-col mb-24">
+    <div>
+      <p>
+        MODS was developed by the NHS England Digitising Social Care (DiSC) programme over four years,
+        formally published April 2025, and applies to:
+      </p>
+      <ul class="req-list mt-24">
+        <li>All <strong>CQC-registered adult social care providers</strong> using or preparing to use assured DSCRs</li>
+        <li>All <strong>DSCR assured solution suppliers</strong> — including vendors like Product X — on the NHS Assured Solutions List</li>
+        <li>All <strong>health IT system suppliers</strong> whose systems interface with the above providers</li>
+        <li>Applies across all care settings: <strong>care homes, supported living, home care</strong></li>
+      </ul>
+      <div class="callout red mt-24">
+        <strong>Deadline:</strong> All DSCR assured suppliers must comply by <strong>1 July 2026</strong>.
+        Non-compliance results in loss of NHS Assured status and removal from the approved solutions list.
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Why MODS Was Needed</div>
+        <p style="font-size:13.5px; color: var(--caption); line-height:1.65;">
+          Before MODS, social care data was collected inconsistently — different labels, formats,
+          and definitions across systems. This prevented meaningful data sharing between care providers
+          and NHS partners such as GPs, hospitals, and integrated care systems.
+        </p>
+        <p style="font-size:13.5px; color: var(--caption); line-height:1.65; margin-top:10px;">
+          MODS defines a common language for social care data — analogous to how GP Connect and
+          Shared Care Records standardised data in the NHS. Once social care data is standardised,
+          it can flow safely and meaningfully across organisations.
+        </p>
+        <div style="margin-top:16px; padding:12px; background: var(--paper); border-radius:4px;">
+          <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-bottom:6px;">Standard Reference</div>
+          <div style="font-size:13px; font-weight:600; color:var(--navy);">DAPB4102</div>
+          <div style="font-size:12px; color:var(--caption);">Published under Section 250, Health and Social Care Act 2012</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.2 Data Domains Covered by MODS</h3>
+  <p>MODS defines standardised data requirements across all major domains of adult social care delivery:</p>
+
+  <div class="domain-grid mt-24">
+    <div class="domain-tile">
+      <div class="d-icon">👤</div>
+      <div class="d-label">Demographics &amp; Identity</div>
+      <div class="d-sub">Name, DOB, NHS No., address, communication preferences</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">🏥</div>
+      <div class="d-label">Health Conditions</div>
+      <div class="d-sub">Diagnoses, allergies, clinical history, risk flags</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">💊</div>
+      <div class="d-label">Medication</div>
+      <div class="d-sub">Medication records, administration logs, MAR charts</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">📝</div>
+      <div class="d-label">Care Plans</div>
+      <div class="d-sub">Personalised care goals, preferences, daily living support</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">📊</div>
+      <div class="d-label">Assessments</div>
+      <div class="d-sub">ADL scores, falls risk, nutritional, cognitive assessments</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">📅</div>
+      <div class="d-label">Care Activities</div>
+      <div class="d-sub">Daily care task records, incidents, observations</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">👨‍👩‍👧</div>
+      <div class="d-label">Family &amp; Contacts</div>
+      <div class="d-sub">Next of kin, lasting power of attorney, advocates</div>
+    </div>
+    <div class="domain-tile">
+      <div class="d-icon">🔗</div>
+      <div class="d-label">Referrals &amp; Handovers</div>
+      <div class="d-sub">NHS referrals, hospital admissions, discharge summaries</div>
+    </div>
+  </div>
+
+  <h3>3.3 Technical &amp; Operational Requirements</h3>
+  <div class="two-col mt-24">
+    <div class="card">
+      <div class="card-title">Technical Requirements</div>
+      <ul class="req-list">
+        <li>Implement <strong>FHIR R4-aligned data structures</strong> for standardised data exchange</li>
+        <li>Adopt <strong>SNOMED CT clinical terminology</strong> for health conditions and care activities</li>
+        <li>Pass the <strong>MODS Assurance Tool</strong> — mandatory online validation before July 2026</li>
+        <li>Support <strong>NHS Login / NHS number</strong> as primary patient identifier across systems</li>
+        <li>Enable structured <strong>API-based data sharing</strong> with partner health systems</li>
+        <li>Ensure <strong>data portability</strong> so providers can switch DSCR without data loss</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Operational Requirements</div>
+      <ul class="req-list">
+        <li>Train care staff to record data using <strong>standardised fields and terminology</strong></li>
+        <li>Update <strong>care home workflows</strong> to align with MODS data collection requirements</li>
+        <li>Implement <strong>data quality processes</strong> to maintain accuracy of MODS-required fields</li>
+        <li>Establish <strong>information governance policies</strong> for sharing MODS data with NHS partners</li>
+        <li>Review and update <strong>consent and privacy notices</strong> to reflect new data flows</li>
+        <li>Coordinate with <strong>ICS/ICB partners</strong> on data sharing agreements for interoperability</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>3.4 Interoperability Benefits Once Compliant</h3>
+  <p>Achieving MODS compliance unlocks several operational and strategic benefits for Product X and its care home customers:</p>
+
+  <div class="three-col mt-24">
+    <div class="card">
+      <div class="card-title">NHS Integration</div>
+      <p style="font-size:13px; color:var(--caption); line-height:1.6;">Standardised data enables seamless connection to GP systems, Shared Care Records, hospital discharge summaries, and the emerging Single Patient Record.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Safer Transitions of Care</div>
+      <p style="font-size:13px; color:var(--caption); line-height:1.6;">Care professionals across settings can access consistent, structured data — reducing errors during hospital admissions, discharges, and care handovers.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Regulatory Confidence</div>
+      <p style="font-size:13px; color:var(--caption); line-height:1.6;">CQC inspectors increasingly expect digital, standardised records. MODS-compliant records demonstrate good data governance and support quality ratings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ 04 COMBINED IMPACT ══════════════════════ -->
+<section id="impact">
+  <div class="sec-header">
+    <div class="sec-kicker">04 · Compliance Strategy</div>
+    <h2 class="sec-title">Combined DPIA &amp; MODS Impact on Product X</h2>
+    <p class="sec-lead">
+      The two frameworks interact directly. MODS defines what data Product X must handle;
+      DPIA governs how it must be protected. Together they shape every layer of the product —
+      from data architecture to deployment contracts.
+    </p>
+  </div>
+
+  <h3>4.1 Impact Analysis by Product X Function</h3>
+
+  <div class="mb-16">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th style="width:22%">Product X Function</th>
+          <th style="width:26%">DPIA Impact</th>
+          <th style="width:26%">MODS Impact</th>
+          <th style="width:13%">DPIA Risk</th>
+          <th style="width:13%">MODS Gap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Resident Health Record</strong></td>
+          <td>Core special category data processing — mandatory DPIA coverage. Must document lawful basis (Art. 9(2)(h)), access controls, retention, and breach procedures.</td>
+          <td>Must implement MODS-defined fields for demographics, health conditions, medications, and care plans using standardised terminology (SNOMED CT).</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td><span class="badge badge-high">Major</span></td>
+        </tr>
+        <tr>
+          <td><strong>Medication Administration</strong></td>
+          <td>High-risk processing requiring documented controls, audit trails, and incident response for data errors that could affect clinical decisions.</td>
+          <td>MODS requires structured MAR chart data, medication names in standardised coding, and linkage to resident NHS number for cross-system sharing.</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td><span class="badge badge-high">Major</span></td>
+        </tr>
+        <tr>
+          <td><strong>Staff Access &amp; Permissions</strong></td>
+          <td>Role-based access controls must be documented in DPIA with audit logging. Over-sharing risk must be assessed and mitigated.</td>
+          <td>MODS does not directly mandate staff data structures, but interoperability requires authenticated, role-verified access consistent with DSPT requirements.</td>
+          <td><span class="badge badge-med">Medium</span></td>
+          <td><span class="badge badge-low">Minor</span></td>
+        </tr>
+        <tr>
+          <td><strong>Care Plan &amp; Assessment Tools</strong></td>
+          <td>If automated suggestions are generated, profiling provisions apply. Must assess whether solely automated decisions are made about care needs.</td>
+          <td>MODS requires standardised assessment data (ADL, falls risk, nutritional scores) with defined fields and code sets for interoperability.</td>
+          <td><span class="badge badge-med">Medium</span></td>
+          <td><span class="badge badge-high">Major</span></td>
+        </tr>
+        <tr>
+          <td><strong>NHS / ICS Data Sharing</strong></td>
+          <td>Each new sharing arrangement requires DPIA review. Data sharing agreements and lawful basis must be documented. Transfer risk assessments for cloud processors.</td>
+          <td>MODS is the prerequisite for meaningful NHS interoperability. API-based sharing using FHIR R4 must be implemented and tested through the MODS Assurance Tool.</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td><span class="badge badge-high">Major</span></td>
+        </tr>
+        <tr>
+          <td><strong>Incident &amp; Safeguarding Records</strong></td>
+          <td>Sensitive data requiring strict access controls, audit trails, and clear retention/deletion policies. Must be included in DPIA scope.</td>
+          <td>MODS requires incident data to be recorded in standardised formats to support cross-system safeguarding alerts and local authority reporting.</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td><span class="badge badge-med">Moderate</span></td>
+        </tr>
+        <tr>
+          <td><strong>Analytics &amp; Reporting</strong></td>
+          <td>Any population-level analytics must be assessed for re-identification risk. Secondary use requires separate legal basis or anonymisation assurance.</td>
+          <td>MODS-standardised data enables secondary data flows to CQC, Skills for Care, and DHSC — but requires explicit data sharing governance.</td>
+          <td><span class="badge badge-med">Medium</span></td>
+          <td><span class="badge badge-med">Moderate</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.2 Privacy-by-Design Requirements Arising from MODS</h3>
+  <p>MODS compliance expands the scope of data processing within Product X — which directly creates new DPIA obligations. Key integration points where both frameworks must align:</p>
+
+  <div class="callout mt-24">
+    <strong>Data Minimisation vs. MODS Completeness:</strong> MODS requires comprehensive baseline data collection across all specified domains. UK GDPR requires data minimisation. Product X must demonstrate that all MODS-required fields are genuinely necessary for care delivery, and must not collect MODS fields that are not applicable to a specific resident's care context.
+  </div>
+  <div class="callout amber">
+    <strong>Interoperability &amp; Consent:</strong> MODS enables data sharing with NHS systems. The DPIA must document the lawful basis for each sharing relationship — whether public task (Article 6(1)(e)), health care provision (Article 9(2)(h)), or another basis — and ensure residents are informed through updated privacy notices.
+  </div>
+  <div class="callout">
+    <strong>Data Quality as a Safety Issue:</strong> MODS-standardised data flows into NHS clinical decision-making. Inaccurate care records in Product X could directly harm patient safety. The DPIA must assess data quality risks and mandate validation controls within the product.
+  </div>
+</section>
+
+<!-- ══════════════════════ 05 RISK REGISTER ══════════════════════ -->
+<section id="risks">
+  <div class="sec-header">
+    <div class="sec-kicker">05 · Risk Assessment</div>
+    <h2 class="sec-title">Non-Compliance Risk Register</h2>
+    <p class="sec-lead">
+      Failure to meet DPIA obligations or the MODS July 2026 deadline carries material legal,
+      financial, operational, and reputational consequences for both the Product X vendor and care home operators.
+    </p>
+  </div>
+
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th style="width:22%">Risk</th>
+        <th style="width:14%">Framework</th>
+        <th style="width:11%">Severity</th>
+        <th style="width:11%">Likelihood</th>
+        <th style="width:42%">Description &amp; Consequences</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ICO Enforcement Action</strong></td>
+        <td>DPIA / UK GDPR</td>
+        <td><span class="badge badge-crit">Critical</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>Processing resident health data without a valid DPIA risks enforcement notices, formal reprimands, and fines up to £17.5M or 4% of global annual turnover. The ICO has issued enforcement notices and named reprimands for DPIA failures in 2024–2026.</td>
+      </tr>
+      <tr>
+        <td><strong>Loss of NHS Assured Status</strong></td>
+        <td>MODS</td>
+        <td><span class="badge badge-crit">Critical</span></td>
+        <td><span class="badge badge-high">High</span></td>
+        <td>Failure to pass the MODS Assurance Tool by 1 July 2026 means removal from the NHS Assured Solutions List. Care homes using non-compliant software cannot claim assured DSCR status, affecting CQC ratings and access to NHS funding streams.</td>
+      </tr>
+      <tr>
+        <td><strong>Data Breach — Resident Health Data</strong></td>
+        <td>DPIA / UK GDPR</td>
+        <td><span class="badge badge-high">High</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>Unauthorised access to, or loss of, special category health data triggers mandatory notification to the ICO within 72 hours and to affected individuals where high risk. Reputational damage and civil liability claims from residents or families may follow.</td>
+      </tr>
+      <tr>
+        <td><strong>Commercial Exclusion</strong></td>
+        <td>MODS</td>
+        <td><span class="badge badge-high">High</span></td>
+        <td><span class="badge badge-high">High</span></td>
+        <td>Care providers will increasingly select MODS-certified DSCR suppliers. A non-compliant Product X risks losing existing customers migrating to compliant alternatives and being excluded from new procurement rounds requiring NHS Assured status.</td>
+      </tr>
+      <tr>
+        <td><strong>CQC Regulatory Impact on Care Homes</strong></td>
+        <td>MODS / DPIA</td>
+        <td><span class="badge badge-high">High</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>CQC inspections increasingly assess digital record quality. A care home using non-MODS-compliant software, or one where a DPIA has not been completed, risks adverse CQC inspection outcomes including requirements notices or enforcement.</td>
+      </tr>
+      <tr>
+        <td><strong>Interoperability Failure</strong></td>
+        <td>MODS</td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td><span class="badge badge-high">High</span></td>
+        <td>Without MODS-standardised data, Product X cannot meaningfully connect to NHS systems, Shared Care Records, or ICS platforms. Clinical professionals cannot access care home data, increasing risk of medication errors and unsafe care transitions.</td>
+      </tr>
+      <tr>
+        <td><strong>Unlawful Data Sharing with NHS Partners</strong></td>
+        <td>DPIA / UK GDPR</td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>If NHS interoperability is enabled without a documented lawful basis and updated privacy notices, each sharing relationship constitutes an unlawful processing activity. This could trigger ICO investigation and require suspension of sharing until remediated.</td>
+      </tr>
+      <tr>
+        <td><strong>Resident / Staff Rights Complaints</strong></td>
+        <td>DPIA / UK GDPR</td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>Residents retain rights to access, rectification, erasure, and restriction of their data. Staff have rights over employment-related data. Absence of DPIA-mandated privacy notices and rights mechanisms creates exposure to individual complaints escalating to the ICO.</td>
+      </tr>
+      <tr>
+        <td><strong>Reputational Damage</strong></td>
+        <td>Both</td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td><span class="badge badge-med">Medium</span></td>
+        <td>Public enforcement actions, data breaches, or adverse CQC findings linked to Product X's compliance failures damage vendor reputation in a sector where trust and data governance credentials are primary purchasing criteria.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════ 06 ROADMAP ══════════════════════ -->
+<section id="roadmap">
+  <div class="sec-header">
+    <div class="sec-kicker">06 · Implementation</div>
+    <h2 class="sec-title">Compliance Readiness Roadmap</h2>
+    <p class="sec-lead">
+      The following phased roadmap covers the period from May 2026 to the July 2026 MODS deadline
+      and beyond, with parallel tracks for immediate DPIA obligations and MODS technical readiness.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>DPIA Track</h3>
+      <div class="timeline mt-24">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Immediate — May 2026</div>
+          <div class="tl-title">DPIA Screening &amp; Initiation</div>
+          <div class="tl-desc">Conduct formal DPIA screening for all existing care home deployments of Product X. Appoint or confirm DPO. Engage legal counsel on UK GDPR Article 35 obligations and DUAA 2025 changes. Commission data flow mapping for all processing activities.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">May – June 2026</div>
+          <div class="tl-title">DPIA Documentation &amp; Risk Assessment</div>
+          <div class="tl-desc">Complete full DPIA using the Health and Care IG Panel standardised template. Document all data flows, lawful bases, retention periods, access controls, and third-party processors. Assess and score all risks. Identify mitigations for each high-risk area.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">June 2026</div>
+          <div class="tl-title">DPO Sign-Off &amp; ICO Consultation (if required)</div>
+          <div class="tl-desc">DPO reviews and signs off DPIA. If any residual risks cannot be mitigated, consult the ICO prior to deployment or continuation of processing. Update all privacy notices and resident information materials.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">July 2026 &amp; Ongoing</div>
+          <div class="tl-title">DPIA Maintenance Programme</div>
+          <div class="tl-desc">Establish quarterly DPIA review cycle. Trigger immediate review on any Product X feature change, new NHS integration, or significant regulatory development. Maintain updated RoPA for all processing activities.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>MODS Track</h3>
+      <div class="timeline mt-24">
+        <div class="tl-item">
+          <div class="tl-dot amber"></div>
+          <div class="tl-date amber">Immediate — May 2026</div>
+          <div class="tl-title">MODS Gap Analysis</div>
+          <div class="tl-desc">Map all current Product X data fields against the MODS DAPB4102 specification published April 2025. Identify gaps in data definitions, missing mandatory fields, non-standardised code sets, and absent FHIR R4 structures. Register for the MODS Assurance Tool.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot amber"></div>
+          <div class="tl-date amber">May – June 2026</div>
+          <div class="tl-title">Technical Remediation Sprint</div>
+          <div class="tl-desc">Prioritise and implement required data model changes: standardise field definitions and labels, implement SNOMED CT coding for clinical data, implement NHS number as primary identifier, and build FHIR R4 APIs for data sharing. Update user interface and care staff workflows.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot amber"></div>
+          <div class="tl-date amber">June 2026</div>
+          <div class="tl-title">MODS Assurance Tool Submission</div>
+          <div class="tl-desc">Submit Product X for assessment through the mandatory MODS Assurance Tool operated by NHS England DiSC programme. Address any findings promptly. Confirm certification before the July 1 deadline. Communicate compliance status to existing care home customers.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot red"></div>
+          <div class="tl-date red">1 July 2026 — DEADLINE</div>
+          <div class="tl-title">Full MODS Compliance Required</div>
+          <div class="tl-desc">All DSCR assured suppliers must be fully MODS-compliant. Post-deadline: continue monitoring DiSC programme updates as MODS evolves. Engage with NHS systems for live interoperability testing. Begin NHS integration connections with ICS partners.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ 07 RECOMMENDATIONS ══════════════════════ -->
+<section id="recs">
+  <div class="sec-header">
+    <div class="sec-kicker">07 · Action Plan</div>
+    <h2 class="sec-title">Recommendations</h2>
+    <p class="sec-lead">
+      The following prioritised recommendations address both immediate DPIA compliance and
+      medium-term MODS readiness for Product X care home installations.
+    </p>
+  </div>
+
+  <h3>Immediate Actions (Now — June 2026)</h3>
+  <div class="rec-grid mt-24">
+    <div class="rec-card">
+      <div class="rec-num">01</div>
+      <div class="rec-content">
+        <div class="rec-title">Initiate DPIA for All Active Deployments</div>
+        <div class="rec-desc">Begin a full DPIA for every current Product X care home installation. Processing of resident health data without a completed, DPO-reviewed DPIA is a live ICO enforcement risk. Use the Health and Care IG Panel standardised template and treat it as a mandatory project gate.</div>
+        <span class="rec-tag">Critical · Now</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">02</div>
+      <div class="rec-content">
+        <div class="rec-title">Commission Comprehensive Data Flow Mapping</div>
+        <div class="rec-desc">Map all data flows within Product X: what resident data is collected, where it is stored, who has access, what third parties receive it, and how it interacts with NHS systems. This is foundational to both the DPIA and the MODS gap analysis — and should be completed in parallel.</div>
+        <span class="rec-tag">Critical · Now</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">03</div>
+      <div class="rec-content">
+        <div class="rec-title">Complete MODS Gap Analysis Against DAPB4102</div>
+        <div class="rec-desc">Systematically compare Product X's current data model against the MODS specification across all eight data domains. Produce a gap register with prioritised remediation tasks. Register immediately for the NHS MODS Assurance Tool to understand submission requirements and timeline.</div>
+        <span class="rec-tag amber">High Priority · June 2026</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">04</div>
+      <div class="rec-content">
+        <div class="rec-title">Appoint or Confirm Data Protection Officer</div>
+        <div class="rec-desc">Ensure a qualified DPO is in place for the Product X vendor and that each care home customer has access to DPO expertise. The DPO must be involved in DPIA completion, review MODS data sharing arrangements, and have the independence to advise on residual risks without operational interference.</div>
+        <span class="rec-tag">Critical · Now</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">05</div>
+      <div class="rec-content">
+        <div class="rec-title">Update Data Processing Agreements</div>
+        <div class="rec-desc">Review and update all Data Processing Agreements between Product X vendor and care home customers to reflect the scope of MODS data processing and NHS data sharing. Ensure agreements cover sub-processors, breach notification obligations, and audit rights in line with UK GDPR requirements.</div>
+        <span class="rec-tag amber">High Priority · June 2026</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">06</div>
+      <div class="rec-content">
+        <div class="rec-title">Implement Technical Remediations for MODS</div>
+        <div class="rec-desc">Prioritise engineering resources to address MODS gaps: standardise data field definitions and labels, implement SNOMED CT coding, integrate NHS number as primary identifier, and build FHIR R4-aligned APIs. These changes must be tested and deployed before MODS Assurance Tool submission in June 2026.</div>
+        <span class="rec-tag amber">High Priority · June 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-40">Medium-Term Actions (July 2026 and Beyond)</h3>
+  <div class="rec-grid mt-24">
+    <div class="rec-card">
+      <div class="rec-num">07</div>
+      <div class="rec-content">
+        <div class="rec-title">Establish Live NHS Interoperability</div>
+        <div class="rec-desc">Following MODS certification, build live connections to NHS systems including GP Connect, Shared Care Records, and ICS platforms in target geographies. Establish information sharing agreements with NHS partners and test data flows end-to-end in production environments.</div>
+        <span class="rec-tag navy">Medium-Term · Q3 2026</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">08</div>
+      <div class="rec-content">
+        <div class="rec-title">Embed DPIA Into Product Development Lifecycle</div>
+        <div class="rec-desc">Institutionalise DPIA as a mandatory development gate — any new Product X feature, integration, or significant data processing change must trigger a DPIA review before release. Embed privacy-by-design and data-by-default principles into engineering practices and procurement processes.</div>
+        <span class="rec-tag navy">Ongoing · Q3 2026+</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">09</div>
+      <div class="rec-content">
+        <div class="rec-title">Staff Training Programme</div>
+        <div class="rec-desc">Deliver targeted training for care home staff on MODS-standardised data recording practices and for vendor staff on UK GDPR obligations. Training should cover data subject rights handling, breach reporting procedures, and the correct use of standardised terminology within Product X's interface.</div>
+        <span class="rec-tag navy">Medium-Term · Q3 2026</span>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">10</div>
+      <div class="rec-content">
+        <div class="rec-title">Monitor MODS Evolution &amp; DUAA Updates</div>
+        <div class="rec-desc">The DiSC programme has committed to evolving MODS as the sector develops. Engage with the NHS DiSC feedback mechanisms and monitor ICO guidance updates following the Data (Use and Access) Act 2025. Allocate resource in the product roadmap for ongoing compliance maintenance as standards evolve.</div>
+        <span class="rec-tag navy">Ongoing · Quarterly</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exec-summary-box mt-40">
+    <p>
+      <strong>Conclusion:</strong> Product X operates at the intersection of two converging regulatory requirements.
+      DPIA compliance under UK GDPR is an <strong>immediate legal obligation</strong> — processing of care home resident health data
+      without a valid, DPO-reviewed DPIA carries live enforcement risk. MODS compliance is a
+      <strong>time-bound commercial and regulatory imperative</strong> — the 1 July 2026 deadline is firm,
+      and the consequences of non-compliance include loss of NHS Assured status and commercial exclusion.
+    </p>
+    <p>
+      The good news is that these frameworks are complementary, not contradictory. A well-constructed DPIA
+      creates the governance architecture that makes MODS data flows lawful and auditable. MODS compliance
+      creates the standardised, documented data infrastructure that supports DPIA risk mitigations.
+      A unified compliance programme — led from the top, resourced appropriately, and treated as
+      a strategic investment rather than a tick-box exercise — will position Product X as a trusted,
+      interoperable, and privacy-respecting platform in the UK care home market.
+    </p>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<footer>
+  <div>
+    <strong>DPIA &amp; MODS Compliance Report — Product X</strong><br>
+    UK Care Home Installations · May 2026 · Confidential
+  </div>
+  <div style="text-align:right;">
+    <div>Regulatory frameworks: UK GDPR (Article 35) · DPA 2018 · DUAA 2025 · MODS DAPB4102</div>
+    <div style="margin-top:4px;">For advice on specific circumstances, consult qualified legal and data protection counsel.</div>
+  </div>
+</footer>
+
+</body>
+</html>
